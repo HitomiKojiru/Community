@@ -1,3 +1,8 @@
+community_campaign:
+    resource: "@CommunityCampaignBundle/Controller/"
+    type:     annotation
+    prefix:   /campaign/
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
