@@ -1,0 +1,21 @@
+{% extends "CommunityCampaignBundle::layout.html.twig" %}
+
+{% block title "Campaigns" %}
+
+{% block content_header '' %}
+
+{% block content %}
+    <h1 class="title">Campaigns</h1>
+
+    <div  ng-app="communityApp" ng-controller="CampaignListCtrl">
+        <label for="limit">Per Page:</label>
+        <input id="limit" type="text" ng-model="limit" ng-change="pageChanged()" />
+        <label for="page">Page</label>
+        <input id="page" type="text" ng-model="page" ng-change="pageChanged()" />
+
+        <ul>
+            <li ng-repeat="campaign in campaigns | limitTo:limit">{[campaign.name]}</li>
+        </ul>
+    </div>
+{% endblock %}
+

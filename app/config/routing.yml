@@ -1,7 +1,7 @@
-community_campaign:
-    resource: "@CommunityCampaignBundle/Controller/"
-    type:     annotation
-    prefix:   /campaign/
+community:
+    type: rest
+    prefix: /api
+    resource: "@CommunityCampaignBundle/Resources/config/routing.yml"
 
 app:
     resource: "@AppBundle/Controller/"

@@ -21,7 +21,6 @@ class Campaign
      */
     private $name;
 
-
     /**
      * Get id
      *
@@ -38,6 +37,21 @@ class Campaign
      * @return string
      */
     public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    public function __toString()
     {
         return $this->name;
     }

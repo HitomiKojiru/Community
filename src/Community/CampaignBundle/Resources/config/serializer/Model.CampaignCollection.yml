@@ -1,0 +1,34 @@
+Community\Lib\Collection\CampaignCollection:
+  exclusion_policy: ALL
+  xml_root_name: campaigns
+  properties:
+    campaigns:
+      expose: true
+      type: array<Community\Lib\Entity\Campaign>
+      xml_list:
+        inline: true
+        entry_name: campaign
+    offset:
+      expose: true
+      type: integer
+      xml_attribute: true
+    limit:
+      expose: true
+      type: integer
+      xml_attribute: true
+  relations:
+    -
+      rel: self
+      href:
+        route: get_campaigns
+        absolute: true
+    -
+      rel: campaign
+      href:
+        route: get_campaign
+        absolute: true
+        generator: templated_uri
+        parameters:
+          id: "{id}"
+      attributes:
+        templated: true
