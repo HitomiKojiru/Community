@@ -8,12 +8,12 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\VirtualProperty;
 
 /**
- * @ORM\Table(name="campaign")
- * @ORM\Entity(repositoryClass="Community\Lib\Repository\CampaignRepository")
+ * @ORM\Table(name="game_system")
+ * @ORM\Entity(repositoryClass="Community\Lib\Repository\GameSystemRepository")
  *
  * @ExclusionPolicy("all")
  */
-class Campaign
+class GameSystem
 {
     /**
      * @ORM\Column(type="integer")
@@ -25,11 +25,6 @@ class Campaign
     private $id;
 
     /**
-     * @ORM\Column(name="game_system_id", type="integer", nullable=true)
-     */
-    private $gameSystemId;
-
-    /**
      * @ORM\Column(name="name", type="string", length=255)
      *
      * @Expose
@@ -37,12 +32,9 @@ class Campaign
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="GameSystem", inversedBy="campaigns")
-     * @ORM\JoinColumn(name="game_system_id", referencedColumnName="id")
-     *
-     * @Expose
+     * @ORM\OneToMany(targetEntity="Campaign", mappedBy="gameSystem")
      */
-    private $gameSystem;
+    private $campaigns;
 
     /**
      * Get id
@@ -75,28 +67,37 @@ class Campaign
     }
 
     /**
-     * Set gameSystem
+     * Add campaigns
      *
-     * @param \Community\Lib\Entity\GameSystem $gameSystem
-     * @return Campaign
+     * @param \Community\Lib\Entity\Campaign $campaigns
+     * @return WhiteLabel
      */
-    public function setGameSystem(\Community\Lib\Entity\GameSystem $gameSystem = null)
+    public function addCampaigns(\Community\Lib\Entity\Campaign $campaigns)
     {
-        $this->gameSystem = $gameSystem;
+        $this->campaigns[] = $campaigns;
 
         return $this;
     }
 
     /**
-     * Get gameSystem
+     * Remove campaigns
      *
-     * @return \Community\Lib\Entity\GameSystem
+     * @param \Community\Lib\Entity\Campaign $campaigns
      */
-    public function getGameSystem()
+    public function removeCampaigns(\Community\Lib\Entity\Campaign $campaigns)
     {
-        return $this->gameSystem;
+        $this->campaigns->removeElement($campaigns);
     }
 
+    /**
+     * Get campaigns
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCampaigns()
+    {
+        return $this->campaigns;
+    }
 
     public function __toString()
     {

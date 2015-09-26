@@ -6,9 +6,9 @@ namespace Community\Lib\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Community\Lib\Entity\Campaign;
+use Community\Lib\Entity\GameSystem;
 
-class LoadCampaignData extends AbstractFixture implements OrderedFixtureInterface
+class LoadGameSystemData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
@@ -16,22 +16,22 @@ class LoadCampaignData extends AbstractFixture implements OrderedFixtureInterfac
     public function load(ObjectManager $manager)
     {
 
-        for ($i=1; $i <= 10; $i++)
-        {
-            $campaign = new Campaign();
-            $campaign->setName('Campaign'.$i);
-            $campaign->setGameSystem($this->getReference('gameSystem-dd5e'));
+        $dd5e = new GameSystem();
+        $dd5e->setName('Dungeons & Dragons - 5th Edition');
+        $manager->persist($dd5e);
 
-            $manager->persist($campaign);
-        }
+
 
         $manager->flush();
+
+        $this->addReference('gameSystem-dd5e', $dd5e);
     }
+
     /**
      * {@inheritDoc}
      */
     public function getOrder()
     {
-        return 2; // the order in which fixtures will be loaded
+        return 1; // the order in which fixtures will be loaded
     }
 }

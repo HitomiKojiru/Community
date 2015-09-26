@@ -1,0 +1,8 @@
+Community\Lib\Entity\GameSystem:
+  exclusion_policy: ALL
+  xml_root_name: game-system
+  properties:
+    name:
+      expose: true
+      type: string
+      groups: [standard, restapi]
